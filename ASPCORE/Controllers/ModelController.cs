@@ -8,6 +8,10 @@ using ASPCORE.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PagedList;
+using PagedList.Mvc;
+using System.Web;
+using cloudscribe.Pagination.Models;
 
 namespace ASPCORE.Controllers
 {
@@ -27,10 +31,20 @@ namespace ASPCORE.Controllers
                 Model = new Models.Model()
            };
         }
-        public IActionResult Index()
+        public IActionResult Index(int pagenumber=1, int pagesize=3)
         {
-            var model = _db.models.Include(m => m.Make);
-            return View(model.ToList());
+            int pagination = (pagesize * pagenumber) - pagesize;
+            //var model = _db.models.Include(m => m.Make);
+            var model = _db.models.Include(m => m.Make).Skip(pagination).Take(pagesize);
+            var result = new PagedResult<Model>
+            {
+                Data = model.AsNoTracking().ToList(),
+                TotalItems = _db.models.Count(),
+                PageNumber = pagenumber,
+                PageSize = pagesize
+            };
+            return View(result);
+            //return View(model.ToList());
         }
 
         //Read VehicleModel page
