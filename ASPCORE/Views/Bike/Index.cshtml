@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ASPCORE.Models.Bike>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@if (ViewBag.success != null)
+{
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+   <h4> <strong>HI!</strong> Successfully created your Bike Registration</h4>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+}
+<br />
+<div class="row">
+    <div class="col-md-6">
+        <h2 class="text-info">Bike lists</h2>
+    </div>
+
+    <div class="col-md-6 text-right">
+        <a class="btn btn-info" asp-action="Create"><i class="fas fa-motorcycle"></i> &nbsp; Add New Bike</a>
+    </div>
+
+    <br />
+
+    <div class="col-12">
+        <table class="table table-striped border">
+            <tr class="table-info">
+                <th>Bike Photo</th>
+                <th>Bike Detail</th>
+                <th>Price</th>
+                <th>Seller Information</th>
+                <th class="text-right">Actions</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><img src="@Html.DisplayFor(m => item.ImagePath)" width="150px" height="100px" /></td>
+                    <td>
+                        <b>Bike</b> :<b>@Html.DisplayFor(m => item.make.Name)</b>
+                        <b>Year</b>:<b>@Html.DisplayFor(m => item.Year)</b><br />
+
+                        <b>Model:</b>@Html.DisplayFor(m => item.model.Name)<br />
+                        <b>Mileage:</b>@Html.DisplayFor(m => item.Mileage)<br />
+                    </td>
+                    <td>@Html.DisplayFor(m => item.Price)@Html.DisplayFor(m => item.Currency)</td>
+                    <td>
+                        <b>Name:</b>@Html.DisplayFor(m => item.SellerName)<br />
+                        <b>Email:</b>@Html.DisplayFor(m => item.SellerEmail)<br />
+                        <b>Phone:</b>@Html.DisplayFor(m => item.SellerPhone)<br />
+                    </td>
+                    <partial name="_EditDeleteTablePartial" model="item.Id" />
+                </tr>
+            }
+        </table>
+    </div>
+
+</div>
+
