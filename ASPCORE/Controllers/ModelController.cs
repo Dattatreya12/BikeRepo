@@ -12,6 +12,7 @@ using PagedList;
 using PagedList.Mvc;
 using System.Web;
 using cloudscribe.Pagination.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace ASPCORE.Controllers
 {
@@ -31,18 +32,44 @@ namespace ASPCORE.Controllers
                 Model = new Models.Model()
            };
         }
-        public IActionResult Index(int pagenumber=1, int pagesize=3)
+        public IActionResult Index(string searchString, string sortorder, int pagenumber=1, int pagesize=3)
         {
+            ViewBag.CurrentSortOrder = sortorder;
+            ViewBag.CurrentSearch = searchString;
+            ViewBag.modalParam = string.IsNullOrEmpty(sortorder) ? "modalsearch" : "";
+
             int pagination = (pagesize * pagenumber) - pagesize;
             //var model = _db.models.Include(m => m.Make);
-            var model = _db.models.Include(m => m.Make).Skip(pagination).Take(pagesize);
+            var model = from b in _db.models.Include(m => m.Make)
+                               select b;
+            var modelcount = model.Count();
+
+            if(!string.IsNullOrEmpty(searchString))
+            {
+                model = model.Where(b => b.Name.Contains(searchString));
+                 modelcount = model.Count();
+            }
+            // Sorting code//
+            switch(sortorder)
+            {
+                case "modalsearch":
+                    model = model.OrderByDescending(b => b.Name);
+                    break;
+                default:
+                    model = model.OrderBy(b => b.Name);
+                    break;
+            }
+
+                model = model
+              .Skip(pagination).Take(pagesize);
             var result = new PagedResult<Model>
             {
                 Data = model.AsNoTracking().ToList(),
-                TotalItems = _db.models.Count(),
+                TotalItems = modelcount,
                 PageNumber = pagenumber,
                 PageSize = pagesize
             };
+            ViewBag.success = HttpContext.Session.GetString("Message");
             return View(result);
             //return View(model.ToList());
         }
@@ -64,6 +91,7 @@ namespace ASPCORE.Controllers
             }
             _db.models.Add(ModelVM.Model);
             _db.SaveChanges();
+            HttpContext.Session.SetString("Message", "success");
             return RedirectToAction(nameof(Index));
         }
 
