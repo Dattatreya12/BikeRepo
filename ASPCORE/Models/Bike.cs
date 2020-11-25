@@ -38,9 +38,5 @@ namespace ASPCORE.Models
         public string Currency { get; set; }
         public string ImagePath { get; set; }
 
-
-
-
-
     }
 }

@@ -1,4 +1,4 @@
-﻿using ASPCORE.Models;
+﻿ using ASPCORE.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +19,7 @@ namespace ASPCORE.AppDBContext
         public DbSet<Model> models { get; set; }
         public DbSet<Bike> Bikes { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Loanusers> Loanusers { get; set; }
 
     }
 }

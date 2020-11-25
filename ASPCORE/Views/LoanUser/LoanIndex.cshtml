@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ASPCORE.Models.Loanusers>
+@{
+    ViewData["Title"] = "LoanIndex";
+}
+
+<br />
+
+<div class="row">
+    <div class="col-md-6">
+        <h2 class="text-info">Loan Employee lists</h2>
+    </div>
+
+    <div class="col-md-6 text-right">
+        <a class="btn btn-info" asp-action="Create"><i class="fas fa-motorcycle"></i> &nbsp;</a>
+    </div>
+
+    <br />
+
+    <div class="col-12">
+        <table class="table table-striped border">
+            <tr class="table-info">
+                <th>Image</th>
+                <th>LastName</th>
+                <th>LoanStatus</th>
+                <th>address</th>
+                <th>Phoneno</th>
+                <th>Image</th>
+                <th class="text-right">Actions</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><img src="@Html.DisplayFor(m => item.ImagePath)" width="150" height="100" /></td>
+                    <td>
+                        <b>Bike</b> :<b>@Html.DisplayFor(m => item.FirstName)</b>
+                        <b>Year</b>:<b>@Html.DisplayFor(m => item.LastName)</b><br />
+
+                        <b>Model:</b>@Html.DisplayFor(m => item.Loanstatus)<br />
+                        
+                    </td>
+                  
+                    <td>
+                        <b>Name:</b>@Html.DisplayFor(m => item.Phoneno)<br />
+                        <b>Email:</b>@Html.DisplayFor(m => item.address)<br />
+                       
+                    </td>
+                    @*<partial name="_EditDeleteTablePartial" model="item.Id" />*@
+                </tr>
+            }
+        </table>
+    </div>
+
+</div>
+
