@@ -1,0 +1,79 @@
+﻿@model ASPCORE.Models.ViewModels.ModelViewModel
+@using ASPCORE.Extensions
+@{
+    ViewData["Title"] = "CreateModel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2 class="text-info">Add Vehicle Model</h2>
+<hr />
+@* success Alert Message *@
+<div id="sucessalert" class="alert alert-warning alert-dismissible fade show" role="alert" style="display:none;">
+    <h4> <strong>HI!</strong> Successfully created your Model</h4>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+@* Fail Alert Message *@
+<div id="failalert" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none;">
+    <h4> <strong>HI!</strong> Error to create Model please contact Admin!</h4>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@*Loading code*@
+<div class="d-flex justify-content-center">
+    <div id="MyLoader" class="spinner-border" role="status" style="display:none;">
+        <span class="sr-only">Loading.....</span>
+    </div>
+</div>
+
+<form method="post" action="createModel" data-ajax="true"  data-ajax-complete="myComplete" data-ajax-success="mySuccess"
+      data-ajax-failure="myFail" data-ajax-loading="#MyLoader" >
+    <div class="form-group row">
+        <div class="col-2">
+            <label asp-for="Makes"> </label>
+        </div>
+        <div class="col-4">
+            <select asp-for="Model.MakeID" asp-items="Model.Makes.MakesListinDropdown()" class="form-control"></select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-2">
+            <label asp-for="Model.Name"> </label>
+        </div>
+
+        <div class="col-4">
+            <input asp-for="Model.Name" class="form-control" />
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        <input id="saveModel" type="submit" class="btn btn-primary" value="Create" />
+        <a asp-action="Index" class="btn btn-success">Back</a>
+    </div>
+
+</form>
+
+@section scripts
+    {
+    <script type="text/javascript">
+        function myComplete() {
+            // working below both code//
+           // alert('Successfully Submitted');
+           // $("div#sucessalert").show();
+            window.location.href = '/Model/Index' ;
+        }
+
+        function mySuccess() {
+            $("#successalert").show();
+        }
+
+        function myFail() {
+            $("#failalert").show();
+        }
+    </script>
+}
+

@@ -1,0 +1,286 @@
+﻿@model ASPCORE.Models.ViewModels.BikeViewModel
+@using ASPCORE.Extensions
+@{
+    ViewData["Title"] = "CreatePost";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<style type="text/css">
+    .my-custom-scrollbar {
+        position: relative;
+        height: 500px;
+        overflow: auto;
+    }
+
+    .table-wrapper-scroll-y {
+        display: block;
+    }
+</style>
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+<div class="container table-wrapper-scroll-y my-custom-scrollbar">
+    <h2 class="text-center">Bike Register Form</h2>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6 pb-5">
+
+            <!--Form with header-->
+            <form method="post" action="Create" enctype="multipart/form-data">
+                <div class="card border-primary rounded-0">
+                    <div class="card-header p-0">
+                        <div class="bg-info text-white text-center py-2">
+                            <h3><i class="fa fa-envelope"></i> Bike Register</h3>
+                            @*<p class="m-0">Con gusto te ayudaremos</p>*@
+                        </div>
+                    </div>
+                    <div class="card-body p-3">
+                        <!--Body-->
+                        <div class="form-group">
+                            <div class="input-group-text" style="color:dimgrey;font-weight:bold;">Select Makes</div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-caret-square-down"></i></div>
+                                </div>
+                                <select asp-for="Bike.MakeID" asp-items="Model.Makes.MakesListinDropdown()" class="form-control"></select>
+                            </div>
+                            <span asp-validation-for="Bike.MakeID" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group-text" style="color:dimgrey;font-weight:bold;">Select Models</div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-caret-square-down"></i></div>
+                                </div>
+                                <select asp-for="Bike.ModelID" asp-items="Model.Models.MakesListinDropdown()" class="form-control"></select>
+                            </div>
+                            <span asp-validation-for="Bike.ModelID" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group-text" style="color:dimgrey;font-weight:bold;">Enter Year</div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+                                </div>
+                                <input asp-for="Bike.Year" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Bike.Year" class="text-danger"></span>
+                        </div>
+                        @*// Mileage*@
+                        <div class="form-group">
+                            <div class="input-group-text" style="color:dimgrey;font-weight:bold;">Enter Mileage</div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-gas-pump"></i></div>
+                                </div>
+                                <input asp-for="Bike.Mileage" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Bike.Mileage" class="text-danger"></span>
+                        </div>
+
+                        @*price*@
+                        <div class="form-group">
+                            <div class="input-group-text" style="color:dimgrey;font-weight:bold;">Enter Price</div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-rupee-sign"></i></div>
+                                </div>
+                                <input asp-for="Bike.Price" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Bike.Price" class="text-danger"></span>
+                        </div>
+
+                        @*Currency*@
+                        <div class="form-group">
+                            <div class="input-group-text" style="color:dimgrey;font-weight:bold;">Enter Currency</div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-rupee-sign"></i></div>
+                                </div>
+                                <select asp-for="Bike.Currency" asp-items="Model.currencies.MakesListinDropdown()" class="form-control"></select>
+                            </div>
+                        </div>
+
+                        @*Features*@
+                        <div class="form-group">
+                            <div class="input-group-text" style="color:dimgrey;font-weight:bold;">Enter Bke Featues</div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fab fa-gratipay"></i></div>
+                                </div>
+                               
+                                <textarea asp-for="Bike.Features" class="form-control"></textarea>
+                            </div>
+                            <span asp-validation-for="Bike.Features" class="text-danger"></span>
+                        </div>
+
+                        @*Seller Name*@
+                        <div class="form-group">
+                            <div class="input-group-text" style="color:dimgrey;font-weight:bold;">Seller Name</div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-user-friends"></i></div>
+                                </div>
+                                <input asp-for="Bike.SellerName" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Bike.SellerName" class="text-danger"></span>
+                        </div>
+
+                        @*Seller Phone*@
+                        <div class="form-group">
+                            <div class="input-group-text" style="color:dimgrey;font-weight:bold;">Seller Phone</div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-phone"></i></div>
+                                </div>
+                                <input asp-for="Bike.SellerPhone" class="form-control" />
+
+                            </div>
+                            <span asp-validation-for="Bike.SellerPhone" class="text-danger"></span>
+                        </div>
+
+                        @*Seller Phone*@
+                        <div class="form-group">
+                            <div class="input-group-text" style="color:dimgrey;font-weight:bold;">Seller Email</div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-envelope-square"></i></div>
+                                </div>
+                                <input asp-for="Bike.SellerEmail" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Bike.SellerEmail" class="text-danger"></span>
+                        </div>
+
+                        @*Image*@
+                        <div class="form-group">
+                            <div class="input-group-text" style="color:dimgrey;font-weight:bold;">Bike Image</div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-file-image"></i></div>
+                                </div>
+                                <input type="file" name="files" class="form-control" />
+                            </div>
+                        </div>
+             
+
+                        <div class="text-center">
+                            <input type="submit" value="Save" class="btn btn-info btn-block rounded-0 py-2">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+
+
+            @*<form method="post" action="Create" enctype="multipart/form-data">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="table-responsive">
+
+                            <table class="table table-striped border col-md-12">
+                                <tr>
+                                    <td colspan="2" class="table-info">
+                                        <h2 style="text-align:center;"> Bike Registration</h2>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td> <label asp-for="Makes"><b>Select Makes</b></label></td>
+                                    <td> <select asp-for="Bike.MakID" asp-items="Model.Makes.MakesListinDropdown()" class="form-control"></select></td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>  <label asp-for="Models"><b>Select Models</b> </label></td>
+                                    <td> <select asp-for="Bike.ModelID" asp-items="Model.Models.MakesListinDropdown()" class="form-control"></select></td>
+                                </tr>
+
+                                <tr>
+                                    <td>  <label asp-for="Bike.Year"><b>Enter Year</b> </label></td>
+                                    <td> <input asp-for="Bike.Year" class="form-control" /></td>
+                                </tr>
+
+                                <tr>
+                                    <td>  <label asp-for="Bike.Mileage"><b>Enter Mileage</b> </label></td>
+                                    <td> <input asp-for="Bike.Mileage" class="form-control" /></td>
+                                </tr>
+
+                                <tr>
+                                    <td>  <label asp-for="Bike.Price"><b>Enter Price</b> </label></td>
+                                    <td> <input asp-for="Bike.Price" class="form-control" /></td>
+                                </tr>
+
+                                <tr>
+                                    <td>  <label asp-for="currencies"><b>Currencies</b> </label></td>
+                                    <td> <select asp-for="Bike.Currency" asp-items="Model.currencies.MakesListinDropdown()" class="form-control"></select></td>
+                                </tr>
+
+                                <tr>
+                                    <td>  <label asp-for="Bike.Features"><b>Enter Features</b> </label></td>
+                                    <td> <input asp-for="Bike.Features" class="form-control" /></td>
+                                </tr>
+
+                                <tr>
+                                    <td>  <label asp-for="Bike.SellerName"><b>Enter Seller Name</b> </label></td>
+                                    <td> <input asp-for="Bike.SellerName" class="form-control" /></td>
+                                    <span asp-validation-for="Bike.SellerName" class="text-danger"></span>
+                                </tr>
+
+                                <tr>
+                                    <td>  <label asp-for="Bike.SellerEmail"> <b>Enter Seller Email</b></label></td>
+                                    <td> <input asp-for="Bike.SellerEmail" class="form-control" /></td>
+                                </tr>
+
+                                <tr>
+                                    <td>  <label asp-for="Bike.SellerPhone"><b>Enter Seller Phone No</b> </label></td>
+                                    <td> <input asp-for="Bike.SellerPhone" class="form-control" /></td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <label asp-for="Bike.ImagePath"></label>
+                                    </td>
+                                    <td><input type="file" name="files" class="form-control" /></td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="2">
+                                        <input type="submit" class="btn btn-primary" value="Create" />
+                                        <a asp-action="Index" class="btn btn-success">Back</a>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+                @*<div class="form-group row">
+                    <div class="col-2">
+                        <label asp-for="Makes"> </label>
+                    </div>
+                    <div class="col-4">
+                        <select asp-for="Model.MakeID" asp-items="Model.Makes.MakesListinDropdown()" class="form-control"></select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-2">
+                        <label asp-for="Model.Name"> </label>
+                    </div>
+
+                    <div class="col-4">
+                        <input asp-for="Model.Name" class="form-control" />
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Create" />
+                    <a asp-action="Index" class="btn btn-success">Back</a>
+                </div>*@
+
+            @*</form>*@
+
+
+

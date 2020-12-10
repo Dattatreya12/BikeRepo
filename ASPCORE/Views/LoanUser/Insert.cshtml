@@ -1,0 +1,111 @@
+﻿@model ASPCORE.Models.ViewModels.LoanuserViewModels
+@using ASPCORE.Extensions
+@{
+    ViewData["Title"] = "Insert";
+}
+
+<h2>Insert</h2>
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+<div class="container table-wrapper-scroll-y my-custom-scrollbar">
+    <h2 class="text-center">Bike Register Form</h2>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6 pb-5">
+
+            <!--Form with header-->
+            <form method="post" action="Insert" enctype="multipart/form-data">
+                <div class="card border-primary rounded-0">
+                    <div class="card-header p-0">
+                        <div class="bg-info text-white text-center py-2">
+                            <h3><i class="fa fa-envelope"></i> Bike Register</h3>
+                            @*<p class="m-0">Con gusto te ayudaremos</p>*@
+                        </div>
+                    </div>
+                    <div class="card-body p-3">
+                        <!--Body-->
+                        
+                       
+
+                        <div class="form-group">
+                            <div class="input-group-text" style="color:dimgrey;font-weight:bold;">Enter FirstName</div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+                                </div>
+                                <input asp-for="lu.FirstName" class="form-control" />
+                            </div>
+                            <span asp-validation-for="lu.FirstName" class="text-danger"></span>
+                        </div>
+                        @*// Mileage*@
+                        <div class="form-group">
+                            <div class="input-group-text" style="color:dimgrey;font-weight:bold;">Enter LastName</div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-gas-pump"></i></div>
+                                </div>
+                                <input asp-for="lu.LastName" class="form-control" />
+                            </div>
+                            <span asp-validation-for="lu.LastName" class="text-danger"></span>
+                        </div>
+
+                        @*price*@
+                        <div class="form-group">
+                            <div class="input-group-text" style="color:dimgrey;font-weight:bold;">Enter adress</div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-rupee-sign"></i></div>
+                                </div>
+                                <input asp-for="lu.address" class="form-control" />
+                            </div>
+                            <span asp-validation-for="lu.address" class="text-danger"></span>
+                        </div>
+
+                        @*Currency*@
+                        <div class="form-group">
+                            <div class="input-group-text" style="color:dimgrey;font-weight:bold;">Enter Currency</div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-rupee-sign"></i></div>
+                                </div>
+                                <select asp-for="lu.Loanstatus" asp-items="Model.loanstatus.MakesListinDropdown()" class="form-control"></select>
+                            </div>
+                        </div>
+
+                        @*Features*@
+                        <div class="form-group">
+                            <div class="input-group-text" style="color:dimgrey;font-weight:bold;">Enter Phoneno</div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fab fa-gratipay"></i></div>
+                                </div>
+
+                                <input asp-for="lu.Phoneno" class="form-control"/>
+                            </div>
+                            <span asp-validation-for="lu.Phoneno" class="text-danger"></span>
+                        </div>
+                       
+
+                      
+                        @*Image*@
+                        <div class="form-group">
+                            <div class="input-group-text" style="color:dimgrey;font-weight:bold;"> Image</div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-file-image"></i></div>
+                                </div>
+                                <input type="file" name="files" class="form-control" />
+                            </div>
+                        </div>
+
+
+                        <div class="text-center">
+                            <input type="submit" value="Save" class="btn btn-info btn-block rounded-0 py-2">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
