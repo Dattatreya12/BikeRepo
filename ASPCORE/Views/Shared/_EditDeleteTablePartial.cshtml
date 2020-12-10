@@ -4,7 +4,7 @@
 *@
 <td class="text-right">
     <div class="btn-group" role="group">
-        <a type="submit" class="btn btn-primary" href="@Url.Action("Edit/"+Model)"><i class="far fa-edit"></i></a>
+        <a type="submit" class="btn btn-primary" href="@Url.Action("Edit/"+Model)"><i class="far fa-edit"></i></a>|
         <form method="post" action="Delete">
             @*<a type="submit" class="btn btn-primary" href="@Url.Action("Delete/"+item.Id)">DELETE</a>*@
             <button onclick="if (!confirm('Aru you sure want to delete Model')) { return false }" type="submit" class="btn btn-danger  rounded-0" asp-action="Delete" asp-route-id="@Model"><i class="far fa-trash-alt"></i></button>

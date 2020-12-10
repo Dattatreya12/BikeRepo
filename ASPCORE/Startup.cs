@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ASPCORE.AppDBContext;
 using ASPCORE.Data;
 using ASPCORE.Models;
+using ASPCORE.Models.ViewModels;
 using ASPCORE.Servcies;
 using ASPCORE.Servcies.IService;
 using Microsoft.AspNetCore.Builder;
@@ -52,7 +53,7 @@ namespace ASPCORE
            .AddDefaultUI()
            .AddDefaultTokenProviders();
             services.AddScoped<IDBInitializer, DBInitialize>();
-            services.AddTransient<ILaonServiceemployee<Loanusers>, LoanServiceEmployee>();
+            services.AddTransient<ILaonServiceemployee<LoanuserViewModels>, LoanServiceEmployee>();
             services.AddTransient<HostingEnvironment>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddCloudscribePagination();

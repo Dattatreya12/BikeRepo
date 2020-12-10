@@ -4,14 +4,16 @@ using ASPCORE.AppDBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ASPCORE.Migrations
 {
     [DbContext(typeof(VroomDbContext))]
-    partial class VroomDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201210103507_loandetaulsadded")]
+    partial class loandetaulsadded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,11 +107,7 @@ namespace ASPCORE.Migrations
 
                     b.Property<string>("address");
 
-                    b.Property<int?>("loanDetailsId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("loanDetailsId");
 
                     b.ToTable("Loanusers");
                 });
@@ -336,13 +334,6 @@ namespace ASPCORE.Migrations
                         .WithMany()
                         .HasForeignKey("ModelID")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ASPCORE.Models.Loanusers", b =>
-                {
-                    b.HasOne("ASPCORE.Models.LoanDetails", "loanDetails")
-                        .WithMany("loanusers")
-                        .HasForeignKey("loanDetailsId");
                 });
 
             modelBuilder.Entity("ASPCORE.Models.Model", b =>
