@@ -62,31 +62,6 @@ namespace ASPCORE.Migrations
                     b.ToTable("Bikes");
                 });
 
-            modelBuilder.Entity("ASPCORE.Models.LoanDetails", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime?>("CreatedOn");
-
-                    b.Property<int>("Emi");
-
-                    b.Property<int>("LoanusersId");
-
-                    b.Property<int>("MonthlyEmi");
-
-                    b.Property<int>("TotalIntrest");
-
-                    b.Property<int>("TotalLoanAmount");
-
-                    b.Property<DateTime?>("UpdatedOn");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("loanDetails");
-                });
-
             modelBuilder.Entity("ASPCORE.Models.Loanusers", b =>
                 {
                     b.Property<int>("Id")
@@ -105,11 +80,7 @@ namespace ASPCORE.Migrations
 
                     b.Property<string>("address");
 
-                    b.Property<int?>("loanDetailsId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("loanDetailsId");
 
                     b.ToTable("Loanusers");
                 });
@@ -336,13 +307,6 @@ namespace ASPCORE.Migrations
                         .WithMany()
                         .HasForeignKey("ModelID")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ASPCORE.Models.Loanusers", b =>
-                {
-                    b.HasOne("ASPCORE.Models.LoanDetails", "loanDetails")
-                        .WithMany("loanusers")
-                        .HasForeignKey("loanDetailsId");
                 });
 
             modelBuilder.Entity("ASPCORE.Models.Model", b =>

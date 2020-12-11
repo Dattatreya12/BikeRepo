@@ -20,7 +20,6 @@ namespace ASPCORE.AppDBContext
         public DbSet<Bike> Bikes { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Loanusers> Loanusers { get; set; }
-        public DbSet<LoanDetails> loanDetails { get; set; }
 
     }
 }

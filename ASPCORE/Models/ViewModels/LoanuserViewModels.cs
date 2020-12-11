@@ -7,24 +7,7 @@ namespace ASPCORE.Models.ViewModels
 {
     public class LoanuserViewModels
     {
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string address { get; set; }
-        public string Phoneno { get; set; }
-        public string Loanstatus { get; set; }
-        public string ImagePath { get; set; }
-
-        public int LoanusersId { get; set; }
-        public int Emi { get; set; }
-        public int TotalLoanAmount { get; set; }
-        public int MonthlyEmi { get; set; }
-        public int TotalIntrest { get; set; }
-        public DateTime? CreatedOn { get; set; }
-        public DateTime? UpdatedOn { get; set; }
-
         public Loanusers lu { get; set; }
-        public LoanDetails loanDetail { get; set; }
         public IEnumerable<Userloanstatus> loanstatus { get; set; }
 
         private List<Userloanstatus> clist = new List<Userloanstatus>();
@@ -37,7 +20,6 @@ namespace ASPCORE.Models.ViewModels
 
         public LoanuserViewModels()
         {
-           
             loanstatus = CreateList();
         }
     }
