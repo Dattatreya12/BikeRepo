@@ -18,7 +18,7 @@ namespace ASPCORE.Servcies
         }
         public int Delete(int id)
         {
-            throw new NotImplementedException();
+            return 0;
         }
 
         public List<Loanusers> GetAll()
